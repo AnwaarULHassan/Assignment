@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DataB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DataBTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserDetails" EntityType="DataB.UserDetails" />
+          <EntitySet Name="Competitions" EntityType="DataB.Competition" />
+          <EntitySet Name="StudentPostCompDetails" EntityType="DataB.StudentPostCompDetails" />
+        </EntityContainer>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Surname_fullName" Type="String" Nullable="true" />
+          <Property Name="fatherName" Type="String" Nullable="true" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="true" />
+          <Property Name="Contact" Type="String" Nullable="false" />
+          <Property Name="dateofEmp_Adm" Type="DateTime" Nullable="false" />
+          <Property Name="Admin" Type="Boolean" Nullable="false" />
+          <Property Name="Staff" Type="Boolean" Nullable="false" />
+          <Property Name="Student" Type="Boolean" Nullable="false" />
+          <Property Name="Manager" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" />
+          <Property Name="endDate" Type="DateTime" Nullable="false" />
+          <Property Name="noofSubs" Type="Int32" Nullable="true" />
+          <Property Name="Rules" Type="String" Nullable="true" />
+          <Property Name="Image" Type="String" Nullable="true" />
+        </EntityType>
+        <EntityType Name="StudentPostCompDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="studentName" Type="String" Nullable="false" />
+          <Property Name="postName" Type="String" Nullable="false" />
+          <Property Name="Remarks" Type="String" Nullable="true" />
+          <Property Name="Rating" Type="String" Nullable="false" />
+          <Property Name="compName" Type="String" Nullable="true" />
+          <Property Name="awardWin" Type="Boolean" Nullable="false" />
+          <Property Name="noofAwards" Type="Int32" Nullable="true" />
+          <Property Name="Image" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="DataB" />
+        <Alias Key="Target" Value="DataB.Store" />
+        <EntityContainerMapping CdmEntityContainer="DataBContainer" StorageEntityContainer="DataBTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
