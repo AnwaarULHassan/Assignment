@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="DataBContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserDetails" EntityType="DataB.UserDetails" />
+    <EntitySet Name="Competitions" EntityType="DataB.Competition" />
+    <EntitySet Name="StudentPostCompDetails" EntityType="DataB.StudentPostCompDetails" />
+    <AssociationSet Name="UserDetailsCompetition" Association="DataB.UserDetailsCompetition">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Competition" EntitySet="Competitions" />
+    </AssociationSet>
+    <AssociationSet Name="UserDetailsStudentPostCompDetails" Association="DataB.UserDetailsStudentPostCompDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="StudentPostCompDetails" EntitySet="StudentPostCompDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Surname_fullName" Type="String" Nullable="true" />
+    <Property Name="fatherName" Type="String" Nullable="true" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <Property Name="Subject" Type="String" Nullable="true" />
+    <Property Name="Contact" Type="String" Nullable="false" />
+    <Property Name="dateofEmp_Adm" Type="DateTime" Nullable="false" />
+    <Property Name="Admin" Type="Boolean" Nullable="false" />
+    <Property Name="Staff" Type="Boolean" Nullable="false" />
+    <Property Name="Student" Type="Boolean" Nullable="false" />
+    <Property Name="Manager" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Competitions" Relationship="DataB.UserDetailsCompetition" FromRole="UserDetails" ToRole="Competition" />
+    <NavigationProperty Name="StudentPostCompDetails" Relationship="DataB.UserDetailsStudentPostCompDetails" FromRole="UserDetails" ToRole="StudentPostCompDetails" />
+  </EntityType>
+  <EntityType Name="Competition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" />
+    <Property Name="endDate" Type="DateTime" Nullable="false" />
+    <Property Name="noofSubs" Type="Int32" Nullable="true" />
+    <Property Name="Rules" Type="String" Nullable="true" />
+    <Property Name="Image" Type="String" Nullable="true" />
+    <NavigationProperty Name="UserDetail" Relationship="DataB.UserDetailsCompetition" FromRole="Competition" ToRole="UserDetails" />
+    <Property Name="UserDetailsId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentPostCompDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="postName" Type="String" Nullable="false" />
+    <Property Name="Remarks" Type="String" Nullable="true" />
+    <Property Name="Rating" Type="String" Nullable="false" />
+    <Property Name="compName" Type="String" Nullable="true" />
+    <Property Name="awardWin" Type="Boolean" Nullable="false" />
+    <Property Name="noofAwards" Type="Int32" Nullable="true" />
+    <Property Name="Image" Type="String" Nullable="false" />
+    <NavigationProperty Name="UserDetail" Relationship="DataB.UserDetailsStudentPostCompDetails" FromRole="StudentPostCompDetails" ToRole="UserDetails" />
+    <Property Name="UserDetailsId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="UserDetailsCompetition">
+    <End Type="DataB.UserDetails" Role="UserDetails" Multiplicity="1" />
+    <End Type="DataB.Competition" Role="Competition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Competition">
+        <PropertyRef Name="UserDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserDetailsStudentPostCompDetails">
+    <End Type="DataB.UserDetails" Role="UserDetails" Multiplicity="1" />
+    <End Type="DataB.StudentPostCompDetails" Role="StudentPostCompDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentPostCompDetails">
+        <PropertyRef Name="UserDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
