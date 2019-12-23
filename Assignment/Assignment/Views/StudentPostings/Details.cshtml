@@ -1,0 +1,90 @@
+﻿@model Assignment.Models.StudentPosting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StudentPosting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.compName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.compName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.awardWin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.awardWin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.noofAwards)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.noofAwards)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserDetailprop.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserDetailprop.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competitionprop.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competitionprop.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

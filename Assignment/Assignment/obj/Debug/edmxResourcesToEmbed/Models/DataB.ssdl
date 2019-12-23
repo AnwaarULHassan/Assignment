@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataBStoreContainer">
+    <EntitySet Name="UserDetails" EntityType="DataB.Store.UserDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Competitions" EntityType="DataB.Store.Competitions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentPostings" EntityType="DataB.Store.StudentPostings" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserDetailsCompetition" Association="DataB.Store.UserDetailsCompetition">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Competition" EntitySet="Competitions" />
+    </AssociationSet>
+    <AssociationSet Name="UserDetailsStudentPosting" Association="DataB.Store.UserDetailsStudentPosting">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="StudentPosting" EntitySet="StudentPostings" />
+    </AssociationSet>
+    <AssociationSet Name="CompetitionStudentPosting" Association="DataB.Store.CompetitionStudentPosting">
+      <End Role="Competition" EntitySet="Competitions" />
+      <End Role="StudentPosting" EntitySet="StudentPostings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="fullName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="fatherName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateofJoin" Type="datetime" Nullable="false" />
+    <Property Name="Admin" Type="bit" Nullable="false" />
+    <Property Name="Staff" Type="bit" Nullable="false" />
+    <Property Name="Student" Type="bit" Nullable="false" />
+    <Property Name="Manager" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Competitions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="startDate" Type="datetime" Nullable="false" />
+    <Property Name="endDate" Type="datetime" Nullable="false" />
+    <Property Name="noofSubs" Type="int" Nullable="true" />
+    <Property Name="Rules" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserDetailsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentPostings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Rating" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="compName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="awardWin" Type="bit" Nullable="false" />
+    <Property Name="noofAwards" Type="int" Nullable="true" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserDetailsId" Type="int" Nullable="false" />
+    <Property Name="CompetitionId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserDetailsCompetition">
+    <End Role="UserDetails" Type="DataB.Store.UserDetails" Multiplicity="1" />
+    <End Role="Competition" Type="DataB.Store.Competitions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Competition">
+        <PropertyRef Name="UserDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserDetailsStudentPosting">
+    <End Role="UserDetails" Type="DataB.Store.UserDetails" Multiplicity="1" />
+    <End Role="StudentPosting" Type="DataB.Store.StudentPostings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentPosting">
+        <PropertyRef Name="UserDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompetitionStudentPosting">
+    <End Role="Competition" Type="DataB.Store.Competitions" Multiplicity="1" />
+    <End Role="StudentPosting" Type="DataB.Store.StudentPostings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentPosting">
+        <PropertyRef Name="CompetitionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

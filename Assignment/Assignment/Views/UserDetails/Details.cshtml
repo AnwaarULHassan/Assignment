@@ -1,0 +1,114 @@
+﻿@model Assignment.Models.UserDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fatherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fatherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateofJoin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateofJoin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Staff)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Staff)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manager)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataBStoreContainer">
+    <EntitySet Name="UserDetails" EntityType="DataB.Store.UserDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Competitions" EntityType="DataB.Store.Competitions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentPostings" EntityType="DataB.Store.StudentPostings" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserDetailsCompetition" Association="DataB.Store.UserDetailsCompetition">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="Competition" EntitySet="Competitions" />
+    </AssociationSet>
+    <AssociationSet Name="UserDetailsStudentPosting" Association="DataB.Store.UserDetailsStudentPosting">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="StudentPosting" EntitySet="StudentPostings" />
+    </AssociationSet>
+    <AssociationSet Name="CompetitionStudentPosting" Association="DataB.Store.CompetitionStudentPosting">
+      <End Role="Competition" EntitySet="Competitions" />
+      <End Role="StudentPosting" EntitySet="StudentPostings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="fullName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="fatherName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateofJoin" Type="datetime" Nullable="false" />
+    <Property Name="Admin" Type="bit" Nullable="false" />
+    <Property Name="Staff" Type="bit" Nullable="false" />
+    <Property Name="Student" Type="bit" Nullable="false" />
+    <Property Name="Manager" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Competitions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="startDate" Type="datetime" Nullable="false" />
+    <Property Name="endDate" Type="datetime" Nullable="false" />
+    <Property Name="noofSubs" Type="int" Nullable="true" />
+    <Property Name="Rules" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="UserDetailsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentPostings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Rating" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="compName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="awardWin" Type="bit" Nullable="false" />
+    <Property Name="noofAwards" Type="int" Nullable="true" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserDetailsId" Type="int" Nullable="false" />
+    <Property Name="CompetitionId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserDetailsCompetition">
+    <End Role="UserDetails" Type="DataB.Store.UserDetails" Multiplicity="1" />
+    <End Role="Competition" Type="DataB.Store.Competitions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Competition">
+        <PropertyRef Name="UserDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserDetailsStudentPosting">
+    <End Role="UserDetails" Type="DataB.Store.UserDetails" Multiplicity="1" />
+    <End Role="StudentPosting" Type="DataB.Store.StudentPostings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentPosting">
+        <PropertyRef Name="UserDetailsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompetitionStudentPosting">
+    <End Role="Competition" Type="DataB.Store.Competitions" Multiplicity="1" />
+    <End Role="StudentPosting" Type="DataB.Store.StudentPostings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentPosting">
+        <PropertyRef Name="CompetitionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserDetails" EntityType="DataB.UserDetails" />
+          <EntitySet Name="Competitions" EntityType="DataB.Competition" />
+          <AssociationSet Name="UserDetailsCompetition" Association="DataB.UserDetailsCompetition">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="Competition" EntitySet="Competitions" />
+          </AssociationSet>
+          <EntitySet Name="StudentPostings" EntityType="DataB.StudentPosting" />
+          <AssociationSet Name="UserDetailsStudentPosting" Association="DataB.UserDetailsStudentPosting">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="StudentPosting" EntitySet="StudentPostings" />
+          </AssociationSet>
+          <AssociationSet Name="CompetitionStudentPosting" Association="DataB.CompetitionStudentPosting">
+            <End Role="Competition" EntitySet="Competitions" />
+            <End Role="StudentPosting" EntitySet="StudentPostings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="fullName" Type="String" Nullable="true" />
+          <Property Name="fatherName" Type="String" Nullable="true" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="true" />
+          <Property Name="Contact" Type="String" Nullable="false" />
+          <Property Name="dateofJoin" Type="DateTime" Nullable="false" />
+          <Property Name="Admin" Type="Boolean" Nullable="false" />
+          <Property Name="Staff" Type="Boolean" Nullable="false" />
+          <Property Name="Student" Type="Boolean" Nullable="false" />
+          <Property Name="Manager" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Competitionsprop" Relationship="DataB.UserDetailsCompetition" FromRole="UserDetails" ToRole="Competition" />
+          <NavigationProperty Name="StudentPostingsprop" Relationship="DataB.UserDetailsStudentPosting" FromRole="UserDetails" ToRole="StudentPosting" />
+        </EntityType>
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="startDate" Type="DateTime" Nullable="false" />
+          <Property Name="endDate" Type="DateTime" Nullable="false" />
+          <Property Name="noofSubs" Type="Int32" Nullable="true" />
+          <Property Name="Rules" Type="String" Nullable="true" />
+          <Property Name="Image" Type="String" Nullable="true" />
+          <NavigationProperty Name="UserDetailprop" Relationship="DataB.UserDetailsCompetition" FromRole="Competition" ToRole="UserDetails" />
+          <Property Name="UserDetailsId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StudentPostingsprop" Relationship="DataB.CompetitionStudentPosting" FromRole="Competition" ToRole="StudentPosting" />
+        </EntityType>
+        <Association Name="UserDetailsCompetition">
+          <End Type="DataB.UserDetails" Role="UserDetails" Multiplicity="1" />
+          <End Type="DataB.Competition" Role="Competition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Competition">
+              <PropertyRef Name="UserDetailsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudentPosting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Remarks" Type="String" Nullable="true" />
+          <Property Name="Rating" Type="String" Nullable="false" />
+          <Property Name="compName" Type="String" Nullable="true" />
+          <Property Name="awardWin" Type="Boolean" Nullable="false" />
+          <Property Name="noofAwards" Type="Int32" Nullable="true" />
+          <Property Name="Image" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserDetailprop" Relationship="DataB.UserDetailsStudentPosting" FromRole="StudentPosting" ToRole="UserDetails" />
+          <Property Name="UserDetailsId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competitionprop" Relationship="DataB.CompetitionStudentPosting" FromRole="StudentPosting" ToRole="Competition" />
+          <Property Name="CompetitionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserDetailsStudentPosting">
+          <End Type="DataB.UserDetails" Role="UserDetails" Multiplicity="1" />
+          <End Type="DataB.StudentPosting" Role="StudentPosting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPosting">
+              <PropertyRef Name="UserDetailsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompetitionStudentPosting">
+          <End Type="DataB.Competition" Role="Competition" Multiplicity="1" />
+          <End Type="DataB.StudentPosting" Role="StudentPosting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentPosting">
+              <PropertyRef Name="CompetitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataBStoreContainer" CdmEntityContainer="DataBContainer">
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(DataB.UserDetails)">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="fullName" ColumnName="fullName" />
+          <ScalarProperty Name="fatherName" ColumnName="fatherName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="dateofJoin" ColumnName="dateofJoin" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+          <ScalarProperty Name="Staff" ColumnName="Staff" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+          <ScalarProperty Name="Manager" ColumnName="Manager" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Competitions">
+      <EntityTypeMapping TypeName="IsTypeOf(DataB.Competition)">
+        <MappingFragment StoreEntitySet="Competitions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="noofSubs" ColumnName="noofSubs" />
+          <ScalarProperty Name="Rules" ColumnName="Rules" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="UserDetailsId" ColumnName="UserDetailsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentPostings">
+      <EntityTypeMapping TypeName="IsTypeOf(DataB.StudentPosting)">
+        <MappingFragment StoreEntitySet="StudentPostings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="compName" ColumnName="compName" />
+          <ScalarProperty Name="awardWin" ColumnName="awardWin" />
+          <ScalarProperty Name="noofAwards" ColumnName="noofAwards" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="UserDetailsId" ColumnName="UserDetailsId" />
+          <ScalarProperty Name="CompetitionId" ColumnName="CompetitionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
