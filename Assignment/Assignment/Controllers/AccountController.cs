@@ -30,17 +30,17 @@ namespace Assignment.Controllers
                 return View();
             }
         }
-        public ActionResult Register()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Register(UserDetails sign)
-        {
-            db.UserDetails.Add(sign);
-            db.SaveChanges();
-            return Redirect("/Accounts/Login");
-        }
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult Register(UserDetails sign)
+        //{
+        //    db.UserDetails.Add(sign);
+        //    db.SaveChanges();
+        //    return Redirect("/Accounts/Login");
+        //}
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

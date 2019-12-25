@@ -52,7 +52,7 @@ namespace Assignment.Controllers
             {
                 db.UserDetails.Add(userDetails);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/Account/Login");
             }
 
             return View(userDetails);

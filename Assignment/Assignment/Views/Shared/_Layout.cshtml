@@ -24,10 +24,25 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                <ul class="nav navbar-nav pull-right">
-                    <li></li>
-                    <li></li>
-                </ul>
+                
+                @{ 
+                    bool isValid = User.Identity.IsAuthenticated;
+                } 
+
+                @if (isValid) 
+                {
+                    <ul class="nav navbar-nav pull-right">
+                        <li>@User.Identity.Name</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav pull-right">
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register", "Create", "UserDetails")</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
